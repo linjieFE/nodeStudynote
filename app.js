@@ -69,11 +69,42 @@ fs.readFile('writeMe.txt','utf-8',function(err,data){
 })
 
 // 异步写入文件
-fs.readFile('writeMe.txt','utf-8',function(err,data){
-    if(err) throw err;//有异常打印异常
-    console.log(data)
-    // fs.writeFile('writeMe2.txt','这是异步写入的内容')
+// fs.readFile('writeMe.txt','utf-8',function(err,data){
+//     if(err) throw err;//有异常打印异常
+//     console.log(data)
+//     fs.writeFile('writeMe2.txt','这是异步写入的内容')
+// })
+
+// 五、 创建和删除文件
+//5.1 引入文件系统模块
+//5.2 使用模块对象调用方法
+
+// fs.unlink('test.txt',function(err){//test.txt被删除
+//     if(err) throw err;
+//     console.log("文件删除成功！")
+// });
+
+// 5.2 创建文件夹 同步/异步
+// 同步
+// fs.mkdirSync('stuff');//创建一个stuff文件夹
+
+
+// 5.3 删除文件夹 同步/异步
+// 同步
+// fs.rmdirSync('stuff');//删除一个stuff文件夹
+
+// 5.4 异步的创建和删除文件夹
+fs.mkdir('stuff',function(){
+    fs.readFile('README.md','utf-8',function(err, data){
+        if(err) throw err;
+        fs.writeFile('./stuff/writeMe.txt',data,function(err){
+            if (err) throw err;
+            console.log('文件已被保存');
+        })
+    })
 })
+
+
 
 
 
