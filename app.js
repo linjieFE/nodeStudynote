@@ -45,3 +45,37 @@ console.log(global)
 myEmitter.emit('someEvent2','异步执行，我会在“2”先打印出来后，再打印出来')
 
 console.log(2)
+
+// 四、文件系统模块
+// 4.1 引入文件系统模块
+var fs = require('fs')
+
+// 4.2 通过对象调用方法 
+/**
+ * 两种方法
+ * 1.同步
+ * 2.异步
+ */
+var readme = fs.readFileSync('README.md','utf8')//同步读取  readFile 异步
+console.log(readme)
+
+// 同步写入
+fs.writeFileSync('writeMe.txt','这是我写入的内容') //同步写入 
+
+//异步读取 fs.readFile(文件名，编码，回调函数)
+fs.readFile('writeMe.txt','utf-8',function(err,data){
+    if(err) throw err;//有异常打印异常
+    console.log(data)//无异常打印文件内容 ，由于异步 控制台最后打印此内容
+})
+
+// 异步写入文件
+fs.readFile('writeMe.txt','utf-8',function(err,data){
+    if(err) throw err;//有异常打印异常
+    console.log(data)
+    // fs.writeFile('writeMe2.txt','这是异步写入的内容')
+})
+
+
+
+
+
