@@ -104,6 +104,18 @@ fs.mkdir('stuff',function(){
     })
 })
 
+// 5.4.2 异步的删除文件夹
+/**
+ * 1.先删除文件夹中的文件
+ * 2.再删除外部的文件夹
+ */
+fs.unlink('./stuff/writeMe.txt', function(){
+    fs.rmdir('stuff',function(err){
+        if(err) throw err;
+        console.log('文件删除成功');
+    })
+})
+
 
 
 
