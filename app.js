@@ -8,3 +8,9 @@ console.log(global)
 /**打印内容
  * {DTRACE_NET_SERVER_CONNECTION: , DTRACE_NET_STREAM_END: , DTRACE_HTTP_SERVER_REQUEST: , DTRACE_HTTP_SERVER_RESPONSE: , DTRACE_HTTP_CLIENT_REQUEST: , …}
  */
+
+ // 二、模块化
+ //2.1 引入模块
+ var stuff =  require("./stuff")
+ console.log(stuff.counter(['Jenny','zheng','zheng','jerry']));
+ console.log(stuff.adder(1,stuff.pi))
