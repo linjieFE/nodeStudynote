@@ -26,15 +26,19 @@ myReadStream.pipe(myWriteStream) //与35-40行代码执行的结果相同
 
 // 搭建服务器
 var server =http.createServer(function(req, res){
-    /** 1.这里改为text/html 而不是 text/plain 2.当读取的是json文件时，text/html 页面显示是的json{...}，text/plain 被格式化的json数据。
-     * 但更建议用  res.writeHead(200,{"Content-type":"application/json"}); 展示效果同text/plain
-    */ 
-    if(req.url !=='/favicon.ico'){//加此判断不会返回/fivicon.ico =>客户端向服务器发送请求：/
-        console.log("额户端向服务器发送请求："+req.url)//这里返回两个内容 一个回返的是路径地址，另一个是 fivicon.ico
-        res.writeHead(200,{"Content-type":"text/plain"});
-        // var myReadStream = fs.createReadStream(__dirname + '/index.html','utf8');//读取html数据
-        var myReadStream = fs.createReadStream(__dirname + '/person.json','utf8');//读取html数据
-        myReadStream.pipe(res)//输入出管道 127.0.0.1:3000 展示是是一个乱码 手机转utf-8会看到页面是writeMe2.txt 内容
+    if(req.url !=='/favicon.ico'){
+        //判断用户所访问的页面地址
+        if(req.url ==='/home' || req.url ==='/'){
+            res.writeHead(200,{"Content-type":"text/html"});
+            fs.createReadStream(__dirname + '/index.html').pipe(res)
+        }else if(req.url ==='/contact'){
+            res.writeHead(200,{"Content-type":"text/html"});
+            fs.createReadStream(__dirname + '/contact.html').pipe(res)
+        }else if(req.url ==='/api/docs'){
+            var data=[{name:"Jenny",age:'18'},{name:"Zoe",age:'9'}]
+            res.writeHead(200,{"Content-type":"application/json"});//写入文件头
+            res.end(JSON.stringify(data));//end 方法展示内容
+        }
     }
 })
 
