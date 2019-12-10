@@ -44,3 +44,4 @@ var server =http.createServer(function(req, res){
 
 server.listen(3000,'127.0.0.1')
 console.log("Server is runing...")
+console.log("安装nodemon 实时监听文件，代替软件启动想到运行的文件")
